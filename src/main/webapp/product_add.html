@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠宝添加</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        //表单校验
+        $(function () {
+            $("#add_btn").click(function () {
+                $.post(
+                    "/product_adds",
+                    $("#add_form").serialize(),
+                    function (update) {
+                        if(update!=null){
+                            alert("添加成功");
+                            location.href="/product_inquiry.html"
+                        }else {
+                            alert("添加失败");
+                            location.href="/product_add.html"
+                        }
+                    },
+                    "json"
+                );
+                alert($("#add_form").serialize());
+            })
+        })
+
+    </script>
+    <link rel="stylesheet" href="css/admincss.css">
+
+
+</head>
+<body>
+<div class="login-box">
+    <div class="title">
+        <style type="text/css">
+            body{
+                background: url("picture/首页1.jpg") no-repeat center center fixed;
+                /*兼容浏览器版本*/
+                -webkit-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        </style>
+        <h1><center><span>珠宝添加</span></center></h1>
+    </div>
+    <table border="0px" cellpadding="10px" cellspacing="0px"
+           style="width: 0%;margin:auto" bordercolor="red" >
+        <form id="add_form" action="Servlet?method=add" method="post">
+            <p><input type="hidden" name="action" value="add"/></p>
+            <td width="12%" style="float: left;margin: 0px;padding: 0px;">
+                <table>
+                    <tr>
+                        <td><input type="text" name="product_id" id="product_id" placeholder="珠宝编号"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="product_name" id="product_name" placeholder="珠宝名称"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="product_price" id="product_price" placeholder="珠宝价格"></td>
+                    </tr>
+                    <tr>
+
+                        <td><input type="text" name="product_num" id="product_num" placeholder="珠宝数量"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="product_address" id="product_address" placeholder="生产地址"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="product_num1" id="product_num1" placeholder="珠宝销售量"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="imgpath" id="imgpath" placeholder="图片地址XX.jpg" ></td>
+                    </tr>
+                </table>
+            <td width="88%" style="float: right;margin: 0px;padding: 0px;">
+                <table>
+                    <tr>
+                        <td><textarea cols="100" rows="30" type="text" name="product_describe" id="product_describe" placeholder="珠宝描述"></textarea></td>
+                    </tr>
+                </table>
+            <tr>
+                <th colspan="2">
+                    <input  id="add_btn" type="submit" value="添加">
+                </th>
+            </tr>
+        </form>
+    </table>
+</div>
+</body>
+</html>

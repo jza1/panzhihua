@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>删除珠宝信息</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            $("#delete_btn").click(function () {
+                $.post(
+                    "/product_deletes",
+                    $("#delete_from").serialize(),
+                    function (product) {
+                        if(product==null){
+                            alert("删除失败，不存在该珠宝")
+                            location.href="/product_delete.html"
+                        }
+                        else {
+                            alert("删除成功")
+                            location.href="/product_inquiry.html"
+                        }
+                    },
+                    "json"
+                );
+                alert($("#delete_from").serialize());
+            })
+        })
+    </script>
+
+</head>
+<body>
+<div class="login-box">
+    <div class="text">
+        <style type="text/css">
+            body{
+                background: url("picture/首页2.jpg") no-repeat center center fixed;
+                /*兼容浏览器版本*/
+                -webkit-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        </style>
+        <h1>
+            删除珠宝信息
+        </h1>
+    </div>
+    <div class="login_inner" style="text-align:center;vertical-align: center">
+        <form id="delete_from" action="delete" method="post" accept-charset="utf-8" >
+            <p><input type="hidden" name="action" value="delete"/></p>
+            <p><input id="product_id" name="product_id" type="text" placeholder="请输入珠宝编号" autocomplete="off" style="width:300px;height:30px"></p>
+            <th colspan="2">
+                <input  id="delete_btn" type="button" value="删除">
+            </th>
+        </form>
+    </div>
+</div>
+</body>
+</html>

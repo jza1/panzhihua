@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>用户页面</title>
+    <style type="text/css">
+        ul{
+            width: 200px;
+            height: 200px;
+            float: right;
+            margin-top: 30px;
+
+        }
+    </style>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        $(function () {
+            $("#workers_manage").click(function () {
+                location.href="/workers_manage.html"
+            })
+            $("#material_inquiry").click(function () {
+                location.href="/material_inquiry.html"
+            })
+            $("#sales_inquiry").click(function () {
+                location.href="/sales_inquiry.html"
+            })
+        })
+        // $(function () {
+        //     $("#inquiry1_btn").click(function () {
+        //         $.post(//将数据传输给后端
+        //             "/workers_inquiry1",
+        //             $("#inquiry1_form").serialize(),
+        //             function (worker) {
+        //                 var wei;
+        //                 for (var i = 0;i<worker.length;i++){
+        //                     var tr =$("<tr>" +
+        //                         "        <td><input value='"+worker[i].workersId+"'></input></td>" +
+        //                         "        <td><input value='"+worker[i].workersN+"'></input></td>" +
+        //                         "        <td><input value='"+worker[i].workersSal+"'></input></td>" +
+        //                         "        <td><input value='"+worker[i].workersTelephone+"'></input></td>" +
+        //                         "        <td><input value='"+worker[i].workersName+"'></input></td>" +
+        //                         "        <td><input value='"+worker[i].workersPassword+"'></input></td>" +
+        //                         "    </tr>")
+        //                     wei= $("<tr id=\"lasttr\">\n" +
+        //                         "            <td></td>\n" +
+        //                         "            <td></td>\n" +
+        //                         "            <td></td>\n" +
+        //                         "            <td></td>\n" +
+        //                         "            <td></td>\n" +
+        //                         "            <td></td>\n" +
+        //                         "        </tr>")
+        //                     tr.appendTo($("#table"))
+        //                 }
+        //                 wei.appendTo($("#table"))
+        //             },
+        //             "json"
+        //         );
+        //     })
+        // })
+        $(function () {
+            $.post(//将数据传输给后端
+                "/workers_inquiry",
+                "action=inquiry",
+                function (worker) {
+                    var wei;
+                    for (var i = 0;i<worker.length;i++){
+                        var tr =$("<tr>" +
+                            "        <td><input value='"+worker[i].workersId+"'></input></td>" +
+                            "        <td><input value='"+worker[i].workersN+"'></input></td>" +
+                            "        <td><input value='"+worker[i].workersSal+"'></input></td>" +
+                            "        <td><input value='"+worker[i].workersTelephone+"'></input></td>" +
+                            "        <td><input value='"+worker[i].workersName+"'></input></td>" +
+                            "        <td><input value='"+worker[i].workersPassword+"'></input></td>" +
+                            "    </tr>")
+                        wei= $("<tr id=\"lasttr\">\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "        </tr>")
+
+                        tr.appendTo($("#table"))
+                    }
+                    wei.appendTo($("#table"))
+                },
+                "json"
+            );
+        })
+    </script>
+    <link rel="stylesheet" href="css/admincss.css">
+</head>
+<body>
+<div class="title">
+    <style type="text/css">
+        body{
+            background: url("picture/1.png") no-repeat center center fixed;
+            /*兼容浏览器版本*/
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+</div>
+<div id="header" >
+    <span class="wel_word"><h4><font color="red">明月珠宝管理员</font></h4></span>
+<!--    <div>-->
+<!--        <form id="inquiry1_form" action="Servlet?method=inquiry1" method="post">-->
+<!--            <p><input type="hidden" name="action" value="inquiry1"/></p>-->
+<!--            <tr>-->
+<!--                <td><input type="text" placeholder="职工账号" name="workersName" id="workersName" style="width:120px;height:30px"></td>-->
+<!--                <td><input  id="inquiry1_btn" type="button" value="个人查询" style="height:30px"></td>-->
+<!--            </tr>-->
+<!--        </form>-->
+<!--    </div>-->
+</div>
+<hr/>
+<table width="100%" align="center">
+    <tr>
+        <td width="20%" style="float: left;margin: 0px;padding: 0px;">
+            <table>
+                <tr>
+                    <td>
+                        <p>
+                            <button id="workers_manage" style="width:120px;height:40px" type="button">职工管理</button>
+                        </p>
+                        <p>
+                            <button id="material_inquiry" style="width:120px;height:40px" type="button">进购查询</button>
+                        </p>
+                        <p>
+                            <button id="sales_inquiry" style="width:120px;height:40px" type="button">销售查询</button></td>
+                        </p>
+                </tr>
+            </table>
+        </td>
+        <td width="80%" style="float: right;margin: 0px;padding: 0px;">
+            <table id="table">
+                <tr>
+                    <td><tr>
+                <th>职工编号</th>
+                <th>职工姓名</th>
+                <th>职工工资</th>
+                <th>职工电话</th>
+                <th>职工账号</th>
+                <th>职工密码</th>
+            </tr></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

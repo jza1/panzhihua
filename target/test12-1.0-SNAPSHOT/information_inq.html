@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>信息反馈</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.post(//将数据传输给后端
+                "/information_inquiry",
+                "action=inquiry",
+                function (information) {
+                    var wei;
+                    for (var i = 0;i<information.length;i++){
+                        var tr =$("<tr>" +
+                            "        <td>"+information[i].cusomer_id+"</td>" +
+                            "        <td>"+information[i].information+"</td>"+
+                            "    </tr>")
+                        wei= $("<tr id=\"lasttr\">\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "        </tr>")
+                        tr.appendTo($("#table"))
+                    }
+                    wei.appendTo($("#table"))
+                },
+                "json"
+            );
+        })
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+<div class="text">
+    <style type="text/css">
+        body{
+            background: url("picture/navbg.png") no-repeat center center fixed;
+            /*兼容浏览器版本*/
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+    <div class="place">
+        <ul class="placeul">
+                    <li><a href="workers_function.html">职工</a></li>
+                    <li><a href="#" style = "font-weight: bold;color: #D91316;">信息反馈</a></li>
+            </ul>
+            </div>
+    <table class="tablelist" id="table" width="100%">
+        <thead>
+        <tr>
+            <th width="20%">顾客账号</th>
+            <th>反馈内容</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+</body>
+</html>

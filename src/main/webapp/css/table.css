@@ -1,0 +1,36 @@
+
+body{
+    background-color: #EEEEEE;
+    margin: 0px;
+    padding: 0px;
+}
+table{
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+table,td,th{
+    border: 1px solid #888;
+    text-align: center;
+}
+.main{
+    width: 600px;
+    height: 300px;
+    background-color: #FFFFFF;
+    padding: 10px;
+    margin: 10px auto;
+    position: relative;
+}
+.main .content{
+    width: 300px;
+}
+.empty{
+    text-align: center;
+    padding: 4px;
+    display: block;
+    border: 0px solid #888;
+    border-width: 0px 1px 1px 1px;
+}
+
+.main .id{ width: 100px;}
+.main .name{width: 100px;}
+.main .adress{width: 100px;}

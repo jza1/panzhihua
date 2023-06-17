@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>销售查询</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.post(//将数据传输给后端
+                "/sales_inquiry",
+                "action=inquiry",
+                function (Product) {
+                    var wei;
+                    for (var i = 0;i<Product.length;i++){
+                        var tr =$("<tr>" +
+                            "        <td><input value='"+Product[i].product_id+"'></input></td>" +
+                            "        <td><input value='"+Product[i].product_name+"'></input></td>" +
+                            "        <td><input value='"+Product[i].product_price+"'></input></td>" +
+                            "        <td><input value='"+Product[i].product_describe+"'></input></td>" +
+                            "        <td><input value='"+Product[i].product_num+"'></input></td>" +
+                            "        <td><input value='"+Product[i].product_address+"'></input></td>" +
+                            "        <td><input value='"+Product[i].product_num1+"'></input></td>" +
+                            "    </tr>")
+                        wei= $("<tr id=\"lasttr\">\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "        </tr>")
+
+                        tr.appendTo($("#table"))
+                    }
+                    wei.appendTo($("#table"))
+                },
+                "json"
+            );
+        })
+    </script>
+
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+<div class="text">
+    <style type="text/css">
+        body{
+            background: url("picture/首页2.jpg") no-repeat center center fixed;
+            /*兼容浏览器版本*/
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+<table id="table">
+    <tr>
+        <th>商品编号</th>
+        <th>商品名字</th>
+        <th>商品价格</th>
+        <th>商品描述</th>
+        <th>剩余数量</th>
+        <th>产品地址</th>
+        <th>出售数量</th>
+    </tr>
+</table>
+</div>
+</body>
+</html>

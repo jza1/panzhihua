@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>职工信息查询</title>
+    <script type="text/javascript"  src="js/jquery-3.3.1.js" ></script>
+    <script type="text/javascript">
+        $(function () {
+                $.post(//将数据传输给后端
+                    "/workers_inquiry",
+                    "action=inquiry",
+                    function (worker) {
+                        var wei;
+                        for (var i = 0;i<worker.length;i++){
+                            var tr =$("<tr>" +
+                                "        <td><input value='"+worker[i].workersId+"'></input></td>" +
+                                "        <td><input value='"+worker[i].workersN+"'></input></td>" +
+                                "        <td><input value='"+worker[i].workersSal+"'></input></td>" +
+                                "        <td><input value='"+worker[i].workersTelephone+"'></input></td>" +
+                                "        <td><input value='"+worker[i].workersName+"'></input></td>" +
+                                "        <td><input value='"+worker[i].workersPassword+"'></input></td>" +
+                                "    </tr>")
+                            wei= $("<tr id=\"lasttr\">\n" +
+                                    "            <td></td>\n" +
+                                    "            <td></td>\n" +
+                                    "            <td></td>\n" +
+                                    "            <td></td>\n" +
+                                    "            <td></td>\n" +
+                                    "            <td></td>\n" +
+                                    "        </tr>")
+
+                            tr.appendTo($("#table"))
+                        }
+                        wei.appendTo($("#table"))
+                    },
+                    "json"
+                );
+        })
+        // function showData(data) {
+        //             var str = "";//定义用于拼接的字符串
+        //             for (var i = 0; i < data.length; i++) {
+        //                      //拼接表格的行和列
+        //                      str = "<tr><td>" + data[i].name + "</td><td>" + data[i].password + "</td></tr>";
+        //                      //追加到table中
+        //                     $("#tab").append(str);         }
+        //        }
+    </script>
+    <link rel="stylesheet" href="css/table.css">
+</head>
+
+<body>
+<div class="text">
+    <style type="text/css">
+        body{
+            background: url("picture/首页2.jpg") no-repeat center center fixed;
+            /*兼容浏览器版本*/
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+    <div class="title">
+        <img src="picture/loginlogo.png" height="71" width="280"/></div>
+    <table id="table">
+        <tr>
+            <th>职工编号</th>
+            <th>职工姓名</th>
+            <th>职工工资</th>
+            <th>职工电话</th>
+            <th>职工账号</th>
+            <th>职工密码</th>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

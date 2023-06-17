@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>进购原料</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        //表单校验
+        $(function () {
+            $("#add_btn").click(function () {
+                    $.post(
+                    "/material_adds",
+                        $("#add_form").serialize(),
+                        function (update) {
+                        if(update!=null){
+                            alert("添加成功");
+                            location.href="/material_inquiry.html"
+                        }else {
+                            alert("添加失败");
+                            location.href="/material_add.html"
+                        }
+                    },
+                    "json"
+                );
+                alert($("#add_form").serialize());
+            })
+        })
+
+    </script>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+<style type="text/css">
+    body{
+        background: url("picture/首页2.jpg") no-repeat center center fixed;
+        /*兼容浏览器版本*/
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
+<div class="top_banner">
+    <img src="picture/topleft.jpg" height="88" width="100%"/>
+</div>
+<div class="login-box">
+    <div class="title">
+        <img src="picture/add.png" height="65" width="65"/>
+        <h1><span>进购原料</span></h1>
+    </div>
+
+<!--    <table border="0px" cellpadding="10px" cellspacing="0px"-->
+<!--           style="width: 50%;margin:auto;background:rgb(195,195,195)"  bordercolor="red" >-->
+        <form id="add_form" action="Servlet?method=add" method="post">
+            <p><input type="hidden" name="action" value="add"/></p>
+<!--            <caption>进购原料</caption>-->
+
+            <p>
+                <tr>
+                    <td>原料编号:</td>
+                    <td><input type="text" name="materialid" id="materialid"></td>
+                </tr>
+            </p>
+            <p>
+                <tr>
+                    <td>原料名称:</td>
+                    <td><input type="text" name="materialname" id="materialname" ></td>
+                </tr>
+            </p>
+            <p>
+                <tr>
+                    <td>进购价格:</td>
+                    <td><input type="text" name="materialprice" id="materialprice"></td>
+                </tr>
+            </p>
+            <p>
+                <tr>
+                    <td>进购数量:</td>
+                    <td><input type="text" name="materialnum" id="materialnum"></td>
+                </tr>
+            </p>
+            <p>
+                <tr>
+                    <th colspan="2">
+                        <center>
+                            <input  id="add_btn" type="submit" value="进购" style="background: #a94442;width:120px;height:40px">
+                        </center>
+                    </th>
+                </tr>
+            </p>
+        </form>
+<!--    </table>-->
+</div>
+</body>
+</html>

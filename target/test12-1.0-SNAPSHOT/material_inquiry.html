@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原料进购查询</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+            $(function () {
+                $.post(//将数据传输给后端
+                    "/material_inquiry",
+                    "action=inquiry",
+                    function (material) {
+                        var wei;
+                        for (var i = 0;i<material.length;i++){
+                            var tr =$("<tr>" +
+                                "        <td><input value='"+material[i].materialid+"'></input></td>" +
+                                "        <td><input value='"+material[i].materialname+"'></input></td>" +
+                                "        <td><input value='"+material[i].materialnum+"'></input></td>" +
+                                "        <td><input value='"+material[i].materialprice+"'></input></td>" +
+                                "    </tr>")
+                            wei= $("<tr id=\"lasttr\">\n" +
+                                "            <td></td>\n" +
+                                "            <td></td>\n" +
+                                "            <td></td>\n" +
+                                "            <td></td>\n" +
+                                "        </tr>")
+
+                            tr.appendTo($("#table"))
+                        }
+                        wei.appendTo($("#table"))
+                    },
+                    "json"
+                );
+            })
+    </script>
+    <link rel="stylesheet" href="css/table.css">
+
+
+</head>
+<body>
+<div class="text">
+    <style type="text/css">
+        body{
+            background: url("picture/首页2.jpg") no-repeat center center fixed;
+            /*兼容浏览器版本*/
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+<table id="table">
+    <tr>
+        <th>原料编号</th>
+        <th>原料品种</th>
+        <th>原料数量</th>
+        <th>原料价格</th>
+    </tr>
+</table>
+</div>
+</body>
+</html>

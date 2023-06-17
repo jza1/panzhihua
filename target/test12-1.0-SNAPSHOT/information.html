@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单取消</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#delete_btn").click(function () {
+                $.post(
+                    "/information",
+                    $("#delete_from").serialize(),
+                    function (result) {
+                        if(result==null){
+                            alert("反馈失败")
+                            location.href="/information.html"
+                        }
+                        else {
+                            alert("反馈成功")
+                            location.href="/customer_function.html"
+                        }
+                    },
+                    "json"
+                );
+            })
+        })
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admincss.css">
+</head>
+<body>
+<div id="header">
+    <img class="logo_img" >
+    <span class="wel_word"><h4><font color="red">售后服务</font></h4></span>
+    <div>
+        <h3><font color="red">回收价格为原价的百分之八十回收</font></h3>
+    </div>
+</div>
+<hr/>
+<div class="login-box">
+    <div class="text">
+        <style type="text/css">
+            body{
+                background: url("picture/1.png") no-repeat center center fixed;
+                /*兼容浏览器版本*/
+                -webkit-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        </style>
+        <table width="100%" align="center">
+            <tr>
+                <td width="20%" style="float: left;margin: 0px;padding: 0px;">
+                    <table>
+                        <tr>
+                            <td>
+                                <div>
+                                    <p><button id="product_manage" style="width:120px;height:40px" type="button">维修申请</button></p>
+                                    <p><button id="material_manage" style="width:120px;height:40px" type="button">退货申请</button></p>
+                                    <p><button id="shopping_manage" style="width:120px;height:40px" type="button">出售申请</button></p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+                <td width="80%" style="float: right;margin: 0px;padding: 0px;">
+                    <table id="table">
+                        <tr>
+                            <div class="login_inner" style="text-align:center;vertical-align: center">
+                                <form id="delete_from" action="delete" method="post" accept-charset="utf-8" >
+                                    <p><input type="hidden" name="action" value="add"/></p>
+                                    <p><input id="cusomer_id" name="cusomer_id" type="text" placeholder="请输入你的账号" autocomplete="off" style="width:300px;height:30px"></p>
+                                    <p><textarea cols="40" rows="40" id="information" name="information" type="text" style="width:300px;height:300px" size="40">请输入反馈信息</textarea></p>
+                                        <input  id="delete_btn" type="button" value="提交">
+                                </form>
+                            </div>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</div>
+</body>
+</html>

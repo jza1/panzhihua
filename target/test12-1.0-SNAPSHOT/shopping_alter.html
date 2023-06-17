@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单修改</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#alter_btn").click(function (){
+                $.post(
+                    "/shopping_alters",
+                    $("#alter_from").serialize(),
+                    function (update) {
+                        if(update!=null){
+                            alert("修改成功")
+                            location.href="/shopping_inquiry.html"
+                        }
+                        else {
+                            alert("修改失败")
+                            location.href="/shopping_alter.html"
+                        }
+                    },
+                    "json"
+                );
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="login-box">
+    <div class="text">
+        <style type="text/css">
+            body{
+                background: url("picture/首页2.jpg") no-repeat center center fixed;
+                /*兼容浏览器版本*/
+                -webkit-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        </style>
+        <h1>
+            珠宝信息修改
+        </h1>
+    </div>
+    <div class="login_inner" style="text-align:center;vertical-align: center">
+        <form id="alter_from" action="alter" method="post" accept-charset="utf-8" >
+            <p><input type="hidden" name="action" value="alter"/></p>
+            <p><input id="product_id" name="product_id" type="text" placeholder="请输入需要修改的订单编号" autocomplete="off" style="width:300px;height:30px"></p>
+            <h3><center>输入需要修改的信息</center></h3>
+            <p><input id="num" name="num" type="text" placeholder="请输入修改后珠宝数量" autocomplete="off" style="width:300px;height:30px"></p>
+            <th colspan="2">
+                <input  id="alter_btn" type="button" value="修改">
+            </th>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

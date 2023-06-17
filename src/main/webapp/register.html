@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+     <meta charset="UTF-8">
+     <title>明月珠宝注册</title>
+     <script src="js/jquery-3.3.1.js"></script>
+     <script language="javascript">
+       //表单校验
+       $(function () {
+           $("#registr_btn").click(function (){
+               $.post(
+                   "/registers",
+               $("#register_form").serialize(),
+                   function (result) {
+                       if(result==0){
+                           alert("用户名或者密码不能为空")
+                           location.href="/register.html"
+                       }
+                       if(result==1){
+                           alert("密码长度错误")
+                           location.href="/register.html"
+                       }
+                       if(result==2){
+                           location.href="/login.html"
+                       }
+                   },
+               "json"
+               );
+           })
+       })
+     </script>
+     <style type="text/css">
+         input {
+             background: #afc5d2;  /*设置输入框背景色*/
+             height: 40px;
+         }
+     </style>
+     <link rel="stylesheet" href="css/common.css">
+     <link rel="stylesheet" href="css/login.css">
+ </head>
+     <body>
+     <style type="text/css">
+         body{
+             background: url("picture/首页2.jpg") no-repeat center center fixed;
+             /*兼容浏览器版本*/
+             -webkit-background-size: cover;
+             -o-background-size: cover;
+             background-size: cover;
+         }
+     </style>
+     <div class="login-box">
+         <div class="title">
+             <img src="picture/i04.png" height="65" width="65"/>
+             <span>注册明月珠宝账号</span>
+                         <form id="register_form" name="register_form" action="Servlet?method=add" method="post" >
+                             <p><input type="hidden" name="action" value="add"/></p>
+                             <td>注册类型:</td>
+                             <td>
+                                 <select name="typ">
+                                     <option name="customer" value="customer" >顾客</option>
+                                 </select>
+                             </td>
+                        <td>
+                            <p>
+                                <input type="text" name="customerName" id="customerName" placeholder="注册登录账号" style="border:0.5px solid #378888">
+
+                                <input type="password" name="customerPassword" id="customerPassword" placeholder="设置登录密码（6~8位）"style="border:0.5px solid #378888">
+                            </p>
+                        </td>
+                         <td><input type="text" name="customerN" placeholder="昵称"style="border:0.5px solid #378888"></td>
+                             <th colspan="2">
+                                 <input  id="registr_btn" type="submit" style="border:0.5px solid #378888;width:120px;height:40px" value="注册">
+                                 <div class="reg">已有账号<a href="login.html">立即登录</a></div>
+                             </th>
+                 </form>
+             </table>
+     </div>
+     </div>
+     </body>
+ </html>

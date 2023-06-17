@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>明月珠宝登录</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#btn_login").click(function () {
+                // $("#imgchangge").attr("src","/verify?a"+new Date().getTime())
+                $.post(//将数据传输给后端
+                    "/logins",
+                    $("#loginForm").serialize(),
+                    function (result) {
+
+                        if(result==1){
+                            location.href="/user_function.html"
+                        }
+                        else if(result==2){
+                            location.href="/workers_function.html"
+                        }
+                        else if(result==3){
+                            location.href="/customer_function.html"
+                        }
+                        else {
+                            location.href="/login.html"
+                            alert("密码或者账号错误");
+                        }
+                    },
+                    "json"
+                );
+            })
+        })
+
+    </script>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/baackground.css">
+
+
+</head>
+<body>
+<style type="text/css">
+    body{
+        background: url("picture/首页3.jpg") no-repeat center center fixed;
+        /*兼容浏览器版本*/
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
+<div class="login-box">
+    <div class="title">
+        <img src="picture/i04.png" height="65" width="65"/>
+        <span>欢迎登录明月珠宝</span>
+        <div class="login_inner" >
+
+            <form id="loginForm" action="login" method="post" accept-charset="utf-8" >
+                <p><input type="hidden" name="action" value="test"/></p>
+
+                <td>登录类型:</td>
+                <td>
+                    <select name="typ">
+                        <option name="user" value="user">用户</option>
+                        <option name="workers" value="workers">职工</option>
+                        <option name="customer" value="customer">顾客</option>
+                    </select>
+                </td>
+                <p><input id="username" name="username" type="text" placeholder="请输入账号" autocomplete="off" ></p>
+                <p><input id="password" name="password" type="password" placeholder="请输入密码" autocomplete="off" ></p>
+                <th colspan="2">
+                    <input  id="btn_login" type="submit" style="color: #fc5628;width:120px;height:40px"  value="登录" >
+                    <div class="reg">没有账户？<a href="register.html">立即注册</a></div>
+                </th>
+            </form>
+
+            </table>
+        </div>
+    </div>
+    </section>
+</div>
+</div>
+</body>
+</html>

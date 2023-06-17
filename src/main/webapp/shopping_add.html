@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单添加</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        //表单校验
+        $(function () {
+            $("#add_btn").click(function () {
+                $.post(
+                    "/shopping_adds",
+                    $("#add_form").serialize(),
+                    function (worker) {
+                        if(worker!=null){
+                            alert("添加成功");
+                            location.href="/shopping_inquiry.html"
+                        }else {
+                            alert("添加失败");
+                            location.href="/shopping_add.html"
+                        }
+                    },
+                    "json"
+                );
+                alert($("#add_form").serialize());
+            })
+        })
+    </script>
+    <link rel="stylesheet" href="css/baackground.css">
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+<div class="login-box">
+    <div class="title">
+        <style type="text/css">
+            body{
+                background: url("picture/首页2.jpg") no-repeat center center fixed;
+                /*兼容浏览器版本*/
+                font-family:'微软雅黑';
+                margin:0 auto;min-width:980px;;
+                -webkit-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        </style>
+        <h1><center><span>订单添加</span></center></h1>
+    </div>
+
+    <table border="0px" cellpadding="10px" cellspacing="0px"
+           style="background-image: url(picture/yzmbg.png);margin: auto;" >
+        <form id="add_form" action="Servlet?method=add" method="post">
+            <p><input type="hidden" name="action" value="add"/></p>
+            <caption>订单添加</caption>
+            <tr>
+                <td>珠宝编号:</td>
+                <td><input type="text" name="product_id" id="product_id"></td>
+            </tr>
+            <tr>
+                <td>珠宝名称:</td>
+                <td><input type="text" name="product_name" id="product_name" ></td>
+            </tr>
+            <tr>
+                <td>购买数量:</td>
+                <td><input type="text" name="num" id="num" ></td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <input  id="add_btn" type="submit" value="添加">
+                </th>
+            </tr>
+        </form>
+    </table>
+</div>
+</body>
+</html>

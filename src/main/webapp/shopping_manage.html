@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>职工功能</title>
+    <style type="text/css">
+        ul{
+            width: 200px;
+            height: 200px;
+            float: right;
+            margin-top: 30px;
+
+        }
+    </style>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        $(function () {
+            $("#shopping_inquiry").click(function () {
+                location.href="/shopping_inquiry.html"
+            })
+            $("#shopping_alter").click(function () {
+                location.href="/shopping_alter.html"
+            })
+        })
+        $(function () {
+            $.post(//将数据传输给后端
+                "/shopping_inquiry",
+                "action=inquiry",
+                function (shopping) {
+                    var wei;
+                    for (var i = 0;i<shopping.length;i++){
+                        var tr =$("<tr>" +
+                            "        <td><input value='"+shopping[i].product_id+"'></input></td>" +
+                            "        <td><input value='"+shopping[i].product_name+"'></input></td>" +
+                            "        <td><input value='"+shopping[i].num+"'></input></td>" +
+                            "        <td><input value='"+shopping[i].product_price+"'></input></td>" +
+                            "    </tr>")
+                        wei= $("<tr id=\"lasttr\">\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "            <td></td>\n" +
+                            "        </tr>")
+
+                        tr.appendTo($("#table"))
+                    }
+                    wei.appendTo($("#table"))
+                },
+                "json"
+            );
+        })
+        $(function () {
+            $("#delete_btn").click(function () {
+                $.post(
+                    "/shopping_deletes",
+                    $("#delete_from").serialize(),
+                    function (shopping) {
+                        if(shopping==null){
+                            alert("取消失败，不存在该订单")
+                            location.href="/shopping_delete.html"
+                        }
+                        else {
+                            alert("删除成功")
+                            location.href="/shopping_inquiry.html"
+                        }
+                    },
+                    "json"
+                );
+                alert($("#delete_from").serialize());
+            })
+        })
+    </script>
+    <link rel="stylesheet" href="css/admincss.css">
+    <link rel="stylesheet" href="css/table.css">
+</head>
+<body>
+<div id="header">
+    <img class="logo_img" >
+    <span class="wel_word"><h4><font color="red">订单管理</font></h4></span>
+    <div>
+        <button id="shopping_inquiry" style="width:120px;height:40px" type="button">订单查询</button>
+        <button id="shopping_alter" style="width:120px;height:40px" type="button">订单修改</button>
+    </div>
+    <div class="login_inner" style="text-align:center;vertical-align: center">
+        <form id="delete_from" action="delete" method="post" accept-charset="utf-8" >
+            <p><input type="hidden" name="action" value="delete"/></p>
+            <p><input id="product_id" name="product_id" type="text" placeholder="请输入珠宝编号" autocomplete="off" ></p>
+            <th colspan="2">
+                <input  id="delete_btn" type="button" value="取消订单">
+            </th>
+        </form>
+    </div>
+</div>
+<hr/>
+<div class="title">
+    <style type="text/css">
+        body{
+            background: url("picture/首页1.jpg") no-repeat center center fixed;
+            /*兼容浏览器版本*/
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+    <table id="table">
+        <tr>
+            <th>珠宝编号</th>
+            <th>珠宝品种</th>
+            <th>珠宝数量</th>
+            <th>珠宝价格</th>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

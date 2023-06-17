@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠宝信息修改</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#alter_btn").click(function (){
+                $.post(
+                    "/product_alters",
+                    $("#alter_from").serialize(),
+                    function (worker) {
+                        if(worker!=null){
+                            alert("修改成功")
+                            location.href="/product_inquiry.html"
+                        }
+                        else {
+                            alert("修改失败")
+                            location.href="/product_alter.html"
+                        }
+                    },
+                    "json"
+                );
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="login-box">
+    <div class="text">
+        <style type="text/css">
+            body{
+                background: url("picture/首页2.jpg") no-repeat center center fixed;
+                /*兼容浏览器版本*/
+                -webkit-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        </style>
+        <h1>
+            珠宝信息修改
+        </h1>
+    </div>
+    <div class="login_inner" style="text-align:center;vertical-align: center">
+        <form id="alter_from" action="alter" method="post" accept-charset="utf-8" >
+            <p><input type="hidden" name="action" value="alter"/></p>
+            <p><input id="product_id" name="product_id" type="text" placeholder="请输入需要修改的珠宝编号" autocomplete="off" style="width:300px;height:30px"></p>
+            <h3><center>输入需要修改的信息</center></h3>
+            <p><input id="product_name" name="product_name" type="text" placeholder="请输入珠宝名称" autocomplete="off" style="width:300px;height:30px"></p>
+            <p><input id="product_price" name="product_price" type="text" placeholder="请输入珠宝价格" autocomplete="off" style="width:300px;height:30px"></p>
+            <p><input id="product_address" name="product_address" type="text" placeholder="请输入生成地址" autocomplete="off" style="width:300px;height:30px"></p>
+            <p><textarea cols="100" rows="40" id="product_describe" name="product_describe" type="text" placeholder="请输入珠宝描述" autocomplete="off"></textarea></p>
+            <th colspan="2">
+                <input  id="alter_btn" type="button" value="修改">
+            </th>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

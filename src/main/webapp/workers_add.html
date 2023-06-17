@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>职工添加</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        //表单校验
+        $(function () {
+            $("#add_btn").click(function () {
+                $.post(
+                    "/workers_adds",
+                    $("#add_form").serialize(),
+                    function (worker) {
+                        if(worker!=null){
+                            alert("添加成功");
+                            location.href="/workers_inquiry.html"
+                        }else {
+                            alert("添加失败");
+                            location.href="/workers_add.html"
+                        }
+                    },
+                    "json"
+                );
+                alert($("#add_form").serialize());
+            })
+        })
+
+    </script>
+    <link rel="stylesheet" href="css/select.css">
+
+
+</head>
+<body>
+<div class="login-box">
+    <div class="title">
+        <style type="text/css">
+            body{
+                background: url("picture/logininfo.png") no-repeat center center fixed;
+                /*兼容浏览器版本*/
+                -webkit-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        </style>
+        <h1><center><span>职工信息添加</span></center></h1>
+    </div>
+
+    <table border="0px" cellpadding="10px" cellspacing="0px"
+           style="width: 22.5%;margin:auto;background-image: url(picture/loginpassword.png)"  bordercolor="red" >
+        <form id="add_form" action="Servlet?method=add" method="post">
+            <p><input type="hidden" name="action" value="add"/></p>
+            <select name="typ">
+                <option name="workers" value="workers" style="background-image: url(picture/d06.png)"></option>
+            </select>
+            <tr>
+                <td>职工编号:</td>
+                <td><input type="text" name="workersId" id="workersId"></td>
+            </tr>
+            <tr>
+                <td>职工姓名:</td>
+                <td><input type="text" name="workersN" id="workersN" ></td>
+            </tr>
+            <tr>
+                <td>职工工资:</td>
+                <td><input type="text" name="workersSal" id="workersSal"></td>
+            </tr>
+            <tr>
+                <td>职工电话:</td>
+                <td><input type="text" name="workersTelephone" id="workersTelephone"></td>
+            </tr>
+            <tr>
+                <td>职工账号:</td>
+                <td><input type="text" name="workersName" id="workersName"></td>
+            </tr>
+            <tr>
+                <td>职工密码:</td>
+                <td><input type="text" name="workersPassword" id="workersPassword"></td>
+            </tr>
+            <tr>
+
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <input  id="add_btn" type="submit" value="添加" >
+                </th>
+            </tr>
+        </form>
+    </table>
+</div>
+</body>
+</html>
